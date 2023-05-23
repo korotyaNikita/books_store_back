@@ -25,4 +25,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'],
         Route::patch('/{role}', UpdateController::class);
         Route::delete('/{role}', DestroyController::class);
     });
+
+    Route::group(['namespace' => 'Users', 'prefix' => 'users'], function () {
+        Route::get('/', IndexController::class);
+        Route::post('/', StoreController::class);
+        Route::get('/{user}', ShowController::class);
+        Route::patch('/{user}', UpdateController::class);
+        Route::delete('/{user}', DestroyController::class);
+    });
 });
