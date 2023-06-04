@@ -22,6 +22,7 @@ class BookResource extends JsonResource
             'name' => $this->name,
             'annotation' => $this->annotation,
             'public_start' => $this->public_start,
+            'public_end' => $this->public_end,
             'author' => new UserResource($this->users),
             'genre' => new GenreResource($this->genre),
             'images' => ImageResource::collection($this->images)

@@ -67,7 +67,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Books', 'prefix' => 'books'],
 Route::group(['namespace' => 'App\Http\Controllers\Profile', 'prefix' => 'profile'], function () {
     Route::group(['namespace' => 'Books', 'prefix' => '{user}/books'], function () {
         Route::get('/', IndexController::class);
+    });
 
+    Route::group(['namespace' => 'Library', 'prefix' => '{user}/library'], function () {
+        Route::get('/', IndexController::class);
+        Route::post('/', StoreController::class);
+        Route::delete('/{book}', DestroyController::class);
     });
 
     Route::group(['namespace' => 'Chapter', 'prefix' => 'chapters'], function () {
