@@ -41,4 +41,36 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'],
         Route::patch('/{user}', UpdateController::class);
         Route::delete('/{user}', DestroyController::class);
     });
+
+    Route::group(['namespace' => 'Genres', 'prefix' => 'genres'], function () {
+        Route::post('/', StoreController::class);
+        Route::patch('/{genre}', UpdateController::class);
+        Route::delete('/{genre}', DestroyController::class);
+    });
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Genres', 'prefix' => 'genres'], function () {
+    Route::get('/', IndexController::class);
+    Route::get('/{genre}', ShowController::class);
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Books', 'prefix' => 'books'], function () {
+    Route::post('/', StoreController::class);
+    Route::get('/', IndexController::class);
+    Route::get('/{book}', ShowController::class);
+
+    Route::group(['namespace' => 'Reader', 'prefix' => '{book}/reader'], function () {
+        Route::get('/', IndexController::class);
+    });
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Profile', 'prefix' => 'profile'], function () {
+    Route::group(['namespace' => 'Books', 'prefix' => '{user}/books'], function () {
+        Route::get('/', IndexController::class);
+
+    });
+
+    Route::group(['namespace' => 'Chapter', 'prefix' => 'chapters'], function () {
+        Route::post('/', StoreController::class);
+    });
 });
