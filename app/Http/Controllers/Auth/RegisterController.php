@@ -35,15 +35,11 @@ class RegisterController extends Controller
             DB::commit();
         } catch (\Exception $exeption) {
             DB::rollBack();
-            return response()->json([
-                'status' => 500,
-                'message' => 'Server error',
-            ]);
+            abort(500);
         }
 
         $request->session()->regenerate();
 
-        //$token = $user->createToken($user->email.'_Token')->plainTextToken;
 
         return response()->json([
             'status' =>200,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Book;
 
+use App\Http\Resources\BookComments\BookCommentsResource;
 use App\Http\Resources\Genre\GenreResource;
 use App\Http\Resources\Image\ImageResource;
 use App\Http\Resources\User\UserResource;
@@ -25,7 +26,8 @@ class BookResource extends JsonResource
             'public_end' => $this->public_end,
             'author' => new UserResource($this->users),
             'genre' => new GenreResource($this->genre),
-            'images' => ImageResource::collection($this->images)
+            'images' => ImageResource::collection($this->images),
+            'comments' => BookCommentsResource::collection($this->comments)
         ];
     }
 }

@@ -23,7 +23,7 @@ class StoreController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            return $e;
+            abort(500);
         }
         $name = md5(Carbon::now() . '_' . $image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
         $filePath = Storage::disk('public')->putFileAs('/images', $image, $name);

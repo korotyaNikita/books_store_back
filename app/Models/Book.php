@@ -30,4 +30,12 @@ class Book extends Model
     public function content() {
         return $this->hasMany(Content::class, 'book_id', 'id');
     }
+
+    public function comments() {
+        return $this->belongsToMany(PostComment::class, 'book_comments', 'book_id', 'user_id');
+    }
+
+    public function reaction() {
+        return $this->belongsToMany(BookUserReaction::class, 'book_user_reactions', 'book_id', 'user_id');
+    }
 }

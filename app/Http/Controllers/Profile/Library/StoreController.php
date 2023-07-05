@@ -18,7 +18,7 @@ class StoreController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            return $e;
+            abort(500);
         }
         return response()->json(['success' => 'success', 200, 'dataID' => new LibraryResource($library)]);
     }

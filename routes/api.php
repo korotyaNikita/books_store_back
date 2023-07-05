@@ -54,6 +54,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Genres', 'prefix' => 'genres'
     Route::get('/{genre}', ShowController::class);
 });
 
+Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
+    Route::get('/', IndexController::class);
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Blogs', 'prefix' => 'posts'], function () {
+    Route::get('/{post}', ShowController::class);
+    Route::get('/', IndexController::class);
+});
+
 Route::group(['namespace' => 'App\Http\Controllers\Books', 'prefix' => 'books'], function () {
     Route::post('/', StoreController::class);
     Route::get('/', IndexController::class);
@@ -66,6 +75,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Books', 'prefix' => 'books'],
 
 Route::group(['namespace' => 'App\Http\Controllers\Profile', 'prefix' => 'profile'], function () {
     Route::group(['namespace' => 'Books', 'prefix' => '{user}/books'], function () {
+        Route::get('/', IndexController::class);
+    });
+
+    Route::group(['namespace' => 'Blogs', 'prefix' => '{user}/blogs'], function () {
+        Route::post('/', StoreController::class);
         Route::get('/', IndexController::class);
     });
 

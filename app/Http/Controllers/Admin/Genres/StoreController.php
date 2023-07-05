@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Genres;
 use App\Http\Controllers\Controller;
 use App\Models\BookGenre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StoreController extends Controller
 {
@@ -17,7 +18,14 @@ class StoreController extends Controller
         ]);
 
         $data = $request->all();
-        $dataId = BookGenre::create($data);
+        try {
+            DB::beginTransaction();
+            $dataId = BookGenre::create($data);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            abort(500);
+        }
         return response()->json(['success' => 'success', 200, 'dataID' => $dataId]);
     }
 }

@@ -13,4 +13,12 @@ class Post extends Model
 
     protected $table = 'posts';
     protected $guarded = false;
+
+    public function users() {
+        return $this->belongsTo(User::class, 'author_id', 'id');
+    }
+
+    public function comments() {
+        return $this->belongsToMany(PostComment::class, 'post_comments', 'post_id', 'user_id');
+    }
 }
